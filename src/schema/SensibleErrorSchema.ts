@@ -1,5 +1,5 @@
 import S from "fluent-json-schema";
-import { FastifyReply } from "fastify";
+import {FastifyReply} from "fastify";
 
 export interface ISensibleErrorSchema {
     statusCode: number;

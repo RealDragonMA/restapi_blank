@@ -1,5 +1,5 @@
 import Webserver from "./base/Webserver";
-import { Logger } from "tslog";
+import {Logger} from "tslog";
 
 class Main {
 
