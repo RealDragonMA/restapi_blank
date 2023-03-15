@@ -36,7 +36,6 @@ export default class Webserver {
             this.server.register(bootstrap, {
                 // Specify directory with our controllers
                 directory: resolve(__dirname, "..", `controllers`),
-
                 // Specify mask to match only our controllers
                 mask: /Controller\./,
             });
@@ -56,10 +55,6 @@ export default class Webserver {
 
     public getServer(): FastifyInstance {
         return this.server;
-    }
-
-    public getSocketIO() {
-        return this.server.io
     }
     
 }

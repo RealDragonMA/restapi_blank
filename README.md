@@ -4,10 +4,6 @@
 
 <strong>Requis : NodeJS</strong>
 
-Pour plus de confort, installez les plugins suivants : \
-- Prettier \
-- Cocher l'xécution de Prettier dans "Actions on Save".
-
 ```bash
 $ npm install
 ```

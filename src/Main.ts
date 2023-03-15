@@ -1,5 +1,6 @@
 import Webserver from "./base/Webserver";
 import { Logger } from "tslog";
+
 class Main {
 
     private readonly webserver: Webserver;

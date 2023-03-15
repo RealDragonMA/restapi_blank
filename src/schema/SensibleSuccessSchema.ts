@@ -1,9 +1,10 @@
 import S from "fluent-json-schema";
 import { FastifyReply } from "fastify";
 
-export interface ISensibleErrorSchema {
+export interface ISensibleSuccessSchema {
     statusCode: number;
-    error: string;
+    success: string;
+    data?: any
     messages?: {
         lang: string;
         message: string
@@ -13,7 +14,8 @@ export interface ISensibleErrorSchema {
 export default () =>
     S.object()
         .prop("statusCode", S.number().required())
-        .prop("error", S.string().required())
+        .prop("success", S.string().required())
+        .prop("data")
         .prop("messages", S.array().items(
             S.object()
                 .prop("lang", S.string().required())
@@ -23,8 +25,8 @@ export default () =>
 /**
  * Send an error response
  * @param reply - The reply of your route
- * @param sensibleError - The options of your error
+ * @param sensibleSuccess - The option of your success
  */
-export function replyError(reply: FastifyReply, sensibleError: ISensibleErrorSchema){
-    reply.code(sensibleError.statusCode).send(sensibleError);
+export function replySuccess(reply: FastifyReply, sensibleSuccess: ISensibleSuccessSchema){
+    reply.code(sensibleSuccess.statusCode).send(sensibleSuccess);
 }
