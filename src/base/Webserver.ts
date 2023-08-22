@@ -3,7 +3,7 @@ import {bootstrap} from "fastify-decorators";
 import {resolve} from "path";
 import Main from "../Main";
 
-interface Iwebserver {
+interface IWebserver {
     port: number;
     middlewares?: IMiddleware[];
 }
@@ -14,25 +14,24 @@ interface IMiddleware<T = {}> {
 }
 
 export default class Webserver {
+
     private readonly port: number;
     private readonly server: FastifyInstance;
     private readonly middlewares: IMiddleware[];
 
-    constructor(option: Iwebserver) {
+    constructor(option: IWebserver) {
         this.port = option.port;
-        this.server = Fastify({
-            logger: true,
-        });
+        this.server = Fastify({ logger: true });
         this.middlewares = option.middlewares ?? [];
     }
 
     public start() {
         return new Promise<void>((success) => {
-            if (this.middlewares.length) {
-                this.middlewares.forEach((middleware) => {
-                    this.server.register(middleware.import, middleware.config);
-                });
-            }
+
+            this.middlewares.forEach((middleware) => {
+                this.server.register(middleware.import, middleware.config);
+            });
+
             this.server.register(bootstrap, {
                 // Specify directory with our controllers
                 directory: resolve(__dirname, "..", `controllers`),
@@ -40,7 +39,7 @@ export default class Webserver {
                 mask: /Controller\./,
             });
 
-            this.server.listen({port: this.port, host:'0.0.0.0'},(err, address) => {
+            this.server.listen({port: this.port, host: '0.0.0.0'}, (err, address) => {
                 if (err) throw err;
                 Main.getLogger().info("The server was successfully started on : " + address);
                 success();
@@ -56,5 +55,5 @@ export default class Webserver {
     public getServer(): FastifyInstance {
         return this.server;
     }
-    
+
 }

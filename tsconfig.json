@@ -3,6 +3,7 @@
         "module": "CommonJS",
         "outDir": "dist",
         "target": "ES6",
+        "declaration": true,
         "strict": true,
         "esModuleInterop": true,
         "moduleResolution": "Node",
@@ -12,7 +13,7 @@
         "typeRoots": ["src/@types", "node_modules/@types", "typings/@types"],
         "types": [
             "node"
-        ],
+        ]
     },
     "include": ["src/**/*", "package.json", ".npmrc"],
     "exclude": ["node_modules", "src/interface", "storage"],

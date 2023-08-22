@@ -11,9 +11,6 @@ class Main {
             port: 80,
             middlewares: [
                 {
-                    import: import("@fastify/sensible"),
-                },
-                {
                     import: import("@fastify/cors"),
                     config: {
                         origin: "*",
