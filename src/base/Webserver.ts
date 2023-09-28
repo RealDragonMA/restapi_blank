@@ -22,7 +22,15 @@ export default class Webserver {
     constructor(option: IWebserver) {
         this.port = option.port;
         this.server = Fastify({ logger: true });
-        this.middlewares = option.middlewares ?? [];
+        this.middlewares = [
+            {
+                import: import("@fastify/cors"),
+                config: {
+                    origin: "*",
+                },
+            },
+            ...option.middlewares ?? []
+        ];
     }
 
     public start() {
@@ -31,6 +39,7 @@ export default class Webserver {
             this.middlewares.forEach((middleware) => {
                 this.server.register(middleware.import, middleware.config);
             });
+
 
             this.server.register(bootstrap, {
                 // Specify directory with our controllers

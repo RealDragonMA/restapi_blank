@@ -7,17 +7,7 @@ class Main {
     private readonly logger: Logger;
 
     constructor() {
-        this.webserver = new Webserver({
-            port: 80,
-            middlewares: [
-                {
-                    import: import("@fastify/cors"),
-                    config: {
-                        origin: "*",
-                    },
-                },
-            ],
-        });
+        this.webserver = new Webserver({ port: 80 });
 
         this.logger = new Logger({
             displayFilePath: "hidden",
