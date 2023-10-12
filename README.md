@@ -1,4 +1,4 @@
-# Projet : Service des sports - Serveur
+# Fastify RAPI
 
 ## Installation
 
@@ -14,9 +14,10 @@ $ npm install
 $ npm run dev
 ```
 
-## Environnements
+## Documentations
 
-Production Back : [???](???) <br>
+- [Fluent Json Schema](https://github.com/fastify/fluent-json-schema)
+- [Fastify Decorators](https://github.com/L2jLiga/fastify-decorators)
 
 ## Technologies utilisées
 
