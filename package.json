@@ -1,5 +1,5 @@
 {
-    "name": "rapi",
+    "name": "reapi",
     "version": "0.1.0",
     "description": "",
     "main": "index.js",
@@ -16,12 +16,8 @@
         "fastify": "^4.10.2",
         "fastify-decorators": "^3.15.0",
         "fluent-json-schema": "^4.0.0",
-        "follow-redirects": "^1.15.2",
         "ts-node": "^10.9.1",
         "tslog": "^3.2.2",
         "typescript": "^4.9.4"
-    },
-    "dependencies": {
-        "fastify-plugin": "^4.5.1"
     }
 }
