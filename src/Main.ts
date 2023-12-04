@@ -1,23 +1,12 @@
-import Webserver from "./base/Webserver";
 import {Logger} from "tslog";
+import WebServer from "../api/WebServer";
 
 class Main {
 
-    private readonly webserver: Webserver;
+    private readonly webserver: WebServer;
     private readonly logger: Logger;
 
     constructor() {
-        this.webserver = new Webserver({
-            port: 80,
-            middlewares: [
-                {
-                    import: import("@fastify/cors"),
-                    config: {
-                        origin: "*",
-                    },
-                },
-            ],
-        });
 
         this.logger = new Logger({
             displayFilePath: "hidden",
@@ -28,13 +17,49 @@ class Main {
             dateTimePattern: "day/month/year hour:minute:second.millisecond",
         });
 
+        this.webserver = new WebServer({
+            fastify: {
+                port: 80,
+                middlewares: [
+                    {
+                        import: import("@fastify/cors"),
+                        config: {
+                            origin: "*",
+                        },
+                    },{
+                        import: import('fastify-socket.io'),
+                        config: {
+                            cors: {
+                                origin: "*",
+                                credentials: true
+                            }
+                        }
+                    },
+                ],
+                options: {
+                    controllers: {
+                        directory: "./controllers",
+                        mask: /\.Controller\./,
+                    },
+                }
+            },
+            mongo: {
+                uri: "xxx",
+                database: "skiclub",
+                options: {
+                    strictQuery: true
+                }
+            }
+        }, this.logger);
+
+
     }
 
     public async start() {
         await this.webserver.start();
     }
 
-    public getWebServer(): Webserver {
+    public getWebServer(): WebServer {
         return this.webserver;
     }
 
